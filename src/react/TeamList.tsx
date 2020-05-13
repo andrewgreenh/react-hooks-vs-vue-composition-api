@@ -4,6 +4,8 @@ import { Search } from "./Search";
 export function TeamList(props: {
   names: string[];
   onSelect: (name: string) => void;
+  onRemove: (name: string) => void;
+  onAdd: (name: string) => void;
 }) {
   return (
     <div className="page">
@@ -11,12 +13,22 @@ export function TeamList(props: {
       <ul className="team-list">
         {props.names.map(name => (
           <li key={name}>
-            <span className="name">{name}</span>
-            <span className="remove">remove</span>
+            <span
+              className="link"
+              onClick={() => props.onSelect(name)}
+            >
+              {name}
+            </span>
+            <span
+              className="link"
+              onClick={() => props.onRemove(name)}
+            >
+              remove
+            </span>
           </li>
         ))}
       </ul>
-      <Search onAdd={name => console.log(name)} />
+      <Search onAdd={props.onAdd} />
     </div>
   );
 }

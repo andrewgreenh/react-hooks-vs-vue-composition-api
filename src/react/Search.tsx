@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getInfo } from "../server/apiClient";
-import { PokemonInfo } from "../server/db";
+import { useAsync } from "./useAsync";
 
 export function Search(props: {
   onAdd: (name: string) => void;
 }) {
   const [searchValue, setSearchValue] = useState("");
-  const [info, setInfo] = useState(
-    null as null | PokemonInfo
+
+  const infoResult = useAsync(
+    "info",
+    searchValue.length >= 3 && [searchValue],
+    getInfo
   );
-
-  useEffect(() => {
-    setInfo(null);
-    if (searchValue.length < 3) return;
-
-    let cancelled = false;
-    getInfo(searchValue).then(info => {
-      if (cancelled) return;
-      setInfo(info);
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [searchValue]);
 
   return (
     <div className="search">
       <h2>Search Pokemon</h2>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          if (infoResult.state !== "done") return;
+          props.onAdd(infoResult.data.name);
+          setSearchValue("");
+        }}
+      >
+        <input
+          value={searchValue}
+          onChange={e => setSearchValue(e.target.value)}
+        />
 
-      <input
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
-      />
+        {infoResult.state === "done" && (
+          <div className="search-info">
+            <img src={infoResult.data.img} />
+            <button>Add to Team</button>
+          </div>
+        )}
+      </form>
     </div>
   );
 }

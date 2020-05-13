@@ -17,12 +17,19 @@ export async function init() {
     if (db.team.some(p => p.name === name)) {
       return;
     }
+    if (db.team.length === 6) {
+      return;
+    }
     db.team.push({
       name,
       comment: "",
       nickname: ""
     });
     await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
+  }
+
+  async function getMember(name: string) {
+    return db.team.find(p => p.name === name) || null;
   }
 
   async function removeFromTeam(name: string) {
@@ -63,7 +70,8 @@ export async function init() {
     addToTeam,
     removeFromTeam,
     updateMember,
-    getInfo
+    getInfo,
+    getMember
   };
 }
 

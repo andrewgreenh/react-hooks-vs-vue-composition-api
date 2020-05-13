@@ -45,6 +45,23 @@ async function main() {
     res.sendStatus(200);
   });
 
+  app.get("/team/:name", async (req, res) => {
+    const name = req.params.name;
+
+    const member = await db.getMember(name);
+
+    if (!member) {
+      return res.send(JSON.stringify(null));
+    }
+
+    const info = await db.getInfo(req.params.name);
+
+    res.send({
+      ...info,
+      ...member
+    });
+  });
+
   app.delete("/team/:name", async (req, res) => {
     await db.removeFromTeam(req.params.name);
     res.sendStatus(200);
@@ -53,7 +70,6 @@ async function main() {
   app.get("/poke-info/:name", async (req, res) => {
     const info = await db.getInfo(req.params.name);
     if (!info) {
-      res.status(404);
       res.setHeader("Content-Type", "application/json");
       return res.send(JSON.stringify(null));
     }

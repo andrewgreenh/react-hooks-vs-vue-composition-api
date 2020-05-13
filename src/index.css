@@ -25,16 +25,6 @@ html {
   border-bottom: 1px solid #aaa;
 }
 
-.team-list .name:hover {
-  color: chartreuse;
-  cursor: pointer;
-}
-
-.team-list .remove:hover {
-  color: chartreuse;
-  cursor: pointer;
-}
-
 input {
   background: transparent;
   border: 1px solid transparent;
@@ -51,4 +41,33 @@ input:focus {
 
 .search input {
   width: 100%;
+}
+
+.search-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-info img {
+  align-self: center;
+  width: 96px;
+  height: 96px;
+}
+
+button {
+  background: rgb(121, 0, 121);
+  border: 0;
+  padding: 0.5em;
+  font-weight: bold;
+  color: white;
+  transition: background 0.2s;
+}
+
+button:active {
+  background: rgb(65, 0, 65);
+}
+
+.link:hover {
+  color: chartreuse;
+  cursor: pointer;
 }

@@ -1,9 +1,24 @@
 {
   "team": [
     {
-      "name": "Ditto",
+      "name": "mewtwo",
       "comment": "",
-      "nickname": "d-dog"
+      "nickname": ""
+    },
+    {
+      "name": "charmander",
+      "comment": "",
+      "nickname": ""
+    },
+    {
+      "name": "snorlax",
+      "comment": "",
+      "nickname": ""
+    },
+    {
+      "name": "ditto",
+      "comment": "",
+      "nickname": ""
     }
   ]
 }
