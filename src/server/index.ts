@@ -14,17 +14,11 @@ async function main() {
   app.get("/team", async (req, res) => {
     const team = await db.getTeam();
 
-    const teamData = await Promise.all(
-      team.map(async p => {
-        const info = await db.getInfo(p.name);
-        return {
-          ...p,
-          ...info!
-        };
-      })
+    const teamNames = await Promise.all(
+      team.map(p => p.name)
     );
 
-    res.send(teamData);
+    res.send(teamNames);
   });
 
   app.post("/team", async (req, res) => {

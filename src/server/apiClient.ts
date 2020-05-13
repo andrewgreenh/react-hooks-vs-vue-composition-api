@@ -1,12 +1,8 @@
-import {
-  DBPokemonData,
-  PokemonData,
-  PokemonInfo
-} from "./db";
+import { DBPokemonData, PokemonInfo } from "./db";
 
 const apiOrigin = "http://localhost:3001";
 
-export async function getTeam(): Promise<PokemonData[]> {
+export async function getTeamNames(): Promise<string[]> {
   return fetch(apiOrigin + "/team").then(x => x.json());
 }
 

@@ -1,6 +1,6 @@
 import VueCompositionApi from "@vue/composition-api";
 import Vue from "vue";
-import { getTeam } from "../server/apiClient";
+import { getTeamNames } from "../server/apiClient";
 import App from "./App.vue";
 
 Vue.use(VueCompositionApi);
@@ -12,4 +12,4 @@ new Vue({
   }
 });
 
-getTeam().then(console.log);
+getTeamNames().then(console.log);

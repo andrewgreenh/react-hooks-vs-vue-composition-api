@@ -5,3 +5,50 @@ html {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana,
     sans-serif;
 }
+
+.page {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.team-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.team-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em 0.5em;
+  border-bottom: 1px solid #aaa;
+}
+
+.team-list .name:hover {
+  color: chartreuse;
+  cursor: pointer;
+}
+
+.team-list .remove:hover {
+  color: chartreuse;
+  cursor: pointer;
+}
+
+input {
+  background: transparent;
+  border: 1px solid transparent;
+
+  border-bottom: 1px solid #aaa;
+  padding: 0.5em 0.5em;
+  outline: none;
+  color: white;
+}
+
+input:focus {
+  border-bottom-color: chartreuse;
+}
+
+.search input {
+  width: 100%;
+}
