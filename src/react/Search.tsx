@@ -31,7 +31,7 @@ export function Search(props: {
 
         {infoResult.state === "done" && (
           <div className="search-info">
-            <img src={infoResult.data.img} />
+            <img src={infoResult.data!.img} />
             <button>Add to Team</button>
           </div>
         )}

@@ -21,6 +21,7 @@ export async function addToTeam(name: string) {
 export async function getMemberDetails(
   name: string
 ): Promise<PokemonData> {
+  // await new Promise(r => setTimeout(r, 6000));
   return fetch(apiOrigin + "/team/" + name).then(x =>
     x.json()
   );

@@ -8,7 +8,7 @@ export function TeamList(props: {
   onAdd: (name: string) => void;
 }) {
   return (
-    <div className="page">
+    <div>
       <h1>My Pokemon Team</h1>
       <ul className="team-list">
         {props.names.map(name => (

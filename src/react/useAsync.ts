@@ -10,10 +10,15 @@ export function useAsync<TResult, TArgs extends any[] = []>(
 ): AsyncResult<TResult> & { refetch: () => Promise<void> } {
   const argsKey = type + JSON.stringify(keys);
 
+  function isCurrent(cacheKey: string) {
+    const cached = promiseCache[cacheKey];
+    return cached && Date.now() - cached.timestamp < 10000;
+  }
+
   const [result, setResult] = useState<
     AsyncResult<TResult>
   >(
-    promiseCache[argsKey]?.result
+    promiseCache[argsKey]?.result && isCurrent(argsKey)
       ? {
           state: "done",
           data: promiseCache[argsKey]!.result,
@@ -39,11 +44,7 @@ export function useAsync<TResult, TArgs extends any[] = []>(
       }
 
       let cached = promiseCache[argsKey];
-      if (
-        !cached ||
-        Date.now() - cached.timestamp >= 10000 ||
-        forceRefetch
-      ) {
+      if (!cached || !isCurrent(argsKey) || forceRefetch) {
         promiseCache[argsKey] = {
           promise: asyncFn(...keys).then(x => {
             if (promiseCache[argsKey]) {

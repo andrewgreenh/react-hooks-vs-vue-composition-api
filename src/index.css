@@ -6,8 +6,8 @@ html {
     sans-serif;
 }
 
-.page {
-  max-width: 400px;
+body {
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -70,4 +70,20 @@ button:active {
 .link:hover {
   color: chartreuse;
   cursor: pointer;
+}
+
+.details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.details-form img {
+  align-self: center;
 }

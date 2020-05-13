@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, {
+  Suspense,
+  unstable_useTransition,
+  useState
+} from "react";
 import {
   addToTeam,
   getTeamNames,
@@ -18,6 +22,9 @@ export function App() {
   const [selectedMember, setSelectedMember] = useState(
     null as string | null
   );
+  const [startTransition] = unstable_useTransition({
+    timeoutMs: 5000
+  });
 
   function onRemove(name: string) {
     removeFromTeam(name).then(membersResult.refetch);
@@ -25,23 +32,31 @@ export function App() {
 
   if (selectedMember) {
     return (
-      <Details
-        name={selectedMember}
-        onBack={() => setSelectedMember(null)}
-      ></Details>
+      <Suspense fallback={<h1>Details Loading</h1>}>
+        <Details
+          name={selectedMember}
+          onBack={() => setSelectedMember(null)}
+        ></Details>
+      </Suspense>
     );
   }
 
   return (
     <>
-      <TeamList
-        names={membersResult.data ?? []}
-        onSelect={name => setSelectedMember(name)}
-        onAdd={name =>
-          addToTeam(name).then(membersResult.refetch)
-        }
-        onRemove={onRemove}
-      ></TeamList>
+      <Suspense fallback={<h1>List Loading</h1>}>
+        <TeamList
+          names={membersResult.data ?? []}
+          onSelect={name => {
+            startTransition(() => {
+              setSelectedMember(name);
+            });
+          }}
+          onAdd={name =>
+            addToTeam(name).then(membersResult.refetch)
+          }
+          onRemove={onRemove}
+        ></TeamList>
+      </Suspense>
     </>
   );
 }

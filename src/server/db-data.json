@@ -1,14 +1,9 @@
 {
   "team": [
     {
-      "name": "mewtwo",
-      "comment": "",
-      "nickname": ""
-    },
-    {
       "name": "charmander",
       "comment": "",
-      "nickname": ""
+      "nickname": "Fire Lizard"
     },
     {
       "name": "snorlax",
@@ -17,6 +12,11 @@
     },
     {
       "name": "ditto",
+      "comment": "Caught on Route 10",
+      "nickname": "Optimus Prime"
+    },
+    {
+      "name": "mew",
       "comment": "",
       "nickname": ""
     }
