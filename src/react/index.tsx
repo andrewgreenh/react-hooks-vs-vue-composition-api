@@ -1,30 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
-import { getInfo } from "../server/apiClient";
-
-function Input() {
-  return <input placeholder="input"></input>;
-}
-
-function Button() {
-  return <button>click</button>;
-}
+import React from "react";
+import { unstable_createRoot } from "react-dom";
+import {} from "react-dom/experimental";
 
 function App() {
-  const [Component, setComponent] = useState(() => Input);
-
-  useEffect(() => {
-    getInfo("pikachu").then(console.log);
-    setTimeout(() => {
-      setComponent(() => Button);
-    }, 5000);
-  }, []);
-
   return (
     <div>
-      <Component />
+      <h1>Hello World</h1>
     </div>
   );
 }
 
-render(<App />, document.getElementById("react-root"));
+unstable_createRoot(
+  document.getElementById("react-root")!
+).render(<App />);
