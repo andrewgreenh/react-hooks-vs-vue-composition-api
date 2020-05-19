@@ -13,16 +13,10 @@ export function TeamList(props: {
       <ul className="team-list">
         {props.names.map(name => (
           <li key={name}>
-            <span
-              className="link"
-              onClick={() => props.onSelect(name)}
-            >
+            <span className="link" onClick={() => props.onSelect(name)}>
               {name}
             </span>
-            <span
-              className="link"
-              onClick={() => props.onRemove(name)}
-            >
+            <span className="link" onClick={() => props.onRemove(name)}>
               remove
             </span>
           </li>

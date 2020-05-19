@@ -1,22 +1,17 @@
 {
   "team": [
     {
-      "name": "charmander",
-      "comment": "",
-      "nickname": "Fire Lizard"
+      "name": "snorlax",
+      "comment": "Comment",
+      "nickname": "Sleepy head"
     },
     {
-      "name": "snorlax",
+      "name": "articuno",
       "comment": "",
       "nickname": ""
     },
     {
-      "name": "ditto",
-      "comment": "Caught on Route 10",
-      "nickname": "Optimus Prime"
-    },
-    {
-      "name": "mew",
+      "name": "pikachu",
       "comment": "",
       "nickname": ""
     }

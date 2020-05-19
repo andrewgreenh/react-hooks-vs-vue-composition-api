@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { getInfo } from "../server/apiClient";
 import { useAsync } from "./useAsync";
 
-export function Search(props: {
-  onAdd: (name: string) => void;
-}) {
+export function Search(props: { onAdd: (name: string) => void }) {
   const [searchValue, setSearchValue] = useState("");
 
   const infoResult = useAsync(

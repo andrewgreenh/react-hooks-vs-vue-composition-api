@@ -1,32 +1,57 @@
-<template>
-  <div>
-    <h1>Hello World!</h1>
-    <component v-bind:is="myComp" v-on:click.native="console.log($event)"></component>
-  </div>
-</template>
 
 <script>
-import { ref } from "@vue/composition-api";
+import { ref, watch, watchEffect } from "@vue/composition-api";
 import ButtonVue from "./Button.vue";
 import InputVue from "./Input.vue";
+import { useAsync } from "./useAsync";
+import { getTeamNames, removeFromTeam, addToTeam } from "../server/apiClient";
+import TeamListVue from "./TeamList.vue";
 
 export default {
   components: {
-    ButtonVue,
-    InputVue
+    TeamListVue
   },
   setup(props, context) {
-    console.log(context);
-    const componentRef = ref(ButtonVue);
+    const { result: membersResult, refetch } = useAsync(
+      "team-names",
+      ref([]),
+      getTeamNames
+    );
 
-    setTimeout(() => {
-      componentRef.value = InputVue;
-    }, 5000);
+    const selectedMember = ref(null);
+
+    function onSelect(name) {
+      selectedMember.value = name;
+    }
+
+    function onRemove(name) {
+      removeFromTeam(name).then(refetch);
+    }
+
+    function onAdd(name) {
+      addToTeam(name).then(refetch);
+    }
 
     return {
-      console,
-      myComp: componentRef
+      membersResult,
+      onAdd,
+      onRemove,
+      onSelect,
+      selectedMember
     };
   }
 };
 </script>
+
+
+<template>
+  <div>
+    <team-list-vue
+      :names="membersResult.data || []"
+      @select="onSelect($event)"
+      @remove="onRemove($event)"
+      @add="onAdd($event)"
+    ></team-list-vue>
+  </div>
+</template>
+
