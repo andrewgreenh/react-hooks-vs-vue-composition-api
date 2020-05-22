@@ -1,15 +1,17 @@
 
 <script>
-import { ref, watch, watchEffect } from "@vue/composition-api";
+import { ref, watch, watchEffect, computed } from "@vue/composition-api";
 import ButtonVue from "./Button.vue";
 import InputVue from "./Input.vue";
 import { useAsync } from "./useAsync";
 import { getTeamNames, removeFromTeam, addToTeam } from "../server/apiClient";
 import TeamListVue from "./TeamList.vue";
+import DetailsVue from "./Details.vue";
 
 export default {
   components: {
-    TeamListVue
+    TeamListVue,
+    DetailsVue
   },
   setup(props, context) {
     const { result: membersResult, refetch } = useAsync(
@@ -46,7 +48,9 @@ export default {
 
 <template>
   <div>
+    <details-vue v-if="selectedMember" :name="selectedMember" @back="selectedMember = null"></details-vue>
     <team-list-vue
+      v-if="!selectedMember"
       :names="membersResult.data || []"
       @select="onSelect($event)"
       @remove="onRemove($event)"
