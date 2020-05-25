@@ -1,8 +1,4 @@
-import {
-  DBPokemonData,
-  PokemonData,
-  PokemonInfo
-} from "./db";
+import { DBPokemonData, PokemonData, PokemonInfo } from "./db";
 
 const apiOrigin = "http://localhost:3001";
 
@@ -18,13 +14,9 @@ export async function addToTeam(name: string) {
   }).then(x => undefined);
 }
 
-export async function getMemberDetails(
-  name: string
-): Promise<PokemonData> {
-  // await new Promise(r => setTimeout(r, 6000));
-  return fetch(apiOrigin + "/team/" + name).then(x =>
-    x.json()
-  );
+export async function getMemberDetails(name: string): Promise<PokemonData> {
+  await new Promise(r => setTimeout(r, 2000));
+  return fetch(apiOrigin + "/team/" + name).then(x => x.json());
 }
 
 export async function removeFromTeam(name: string) {
@@ -45,21 +37,14 @@ export async function updateTeamMember(
   }).then(x => undefined);
 }
 
-export async function getInfo(
-  name: string
-): Promise<PokemonInfo> {
-  return fetch(
-    apiOrigin + "/poke-info/" + name.toLowerCase(),
-    {
-      method: "GET"
-    }
-  )
+export async function getInfo(name: string): Promise<PokemonInfo> {
+  return fetch(apiOrigin + "/poke-info/" + name.toLowerCase(), {
+    method: "GET"
+  })
     .then(x => x.json())
     .then(r => {
       if (r === null) {
-        throw new Error(
-          `No Pokemon with name ${name} found.`
-        );
+        throw new Error(`No Pokemon with name ${name} found.`);
       }
       return r;
     });

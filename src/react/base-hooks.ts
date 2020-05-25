@@ -1,22 +1,17 @@
-import {
-  ComponentProps,
-  useCallback,
-  useState
-} from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 export function useInput(initialValue = "") {
   const [value, setValue] = useState(initialValue);
   const [touched, setTouched] = useState(false);
 
-  const onChange: ComponentProps<
-    "input"
-  >["onChange"] = useCallback(e => {
-    setValue(e.target.value);
-  }, []);
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value);
+    },
+    []
+  );
 
-  const onBlur: ComponentProps<
-    "input"
-  >["onChange"] = useCallback(e => {
+  const onBlur = useCallback(() => {
     setTouched(true);
   }, []);
 

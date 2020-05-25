@@ -76,5 +76,6 @@ export default {
       <button :disabled="loading.value.value">{{loading.value.value ? "Loading" : "Save"}}</button>
     </form>
   </div>
+  <div v-else>Loading</div>
 </template>
 
